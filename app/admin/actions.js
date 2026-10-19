@@ -54,6 +54,24 @@ export async function keluar() {
 export const logout = keluar;
 
 /**
+ * Memeriksa di server bahwa pengguna aktif memiliki sesi login admin.
+ * Wajib digunakan oleh setiap Server Action yang mengubah data.
+ */
+export async function periksaAdminLogin() {
+  const supabase = await buatKlienAdmin();
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
+
+  if (error || !user) {
+    throw new Error("Akses ditolak: Kamu harus login terlebih dahulu.");
+  }
+
+  return { supabase, user };
+}
+
+/**
  * Server Action untuk mengganti password admin yang sedang login.
  * Memvalidasi panjang minimal 8 karakter dan kesamaan konfirmasi password.
  */
