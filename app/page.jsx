@@ -1,5 +1,5 @@
 import KartuProduk from "@/components/KartuProduk";
-import { buatKlienServer } from "@/lib/supabase/server";
+import { buatKlienServer } from "@/lib/supabase";
 import { toko } from "@/lib/toko";
 
 export const dynamic = "force-dynamic";
